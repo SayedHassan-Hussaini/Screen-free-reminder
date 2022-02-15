@@ -1,0 +1,21 @@
+/* some style */
+.card {
+  padding-bottom: 1.2rem;
+}
+.wrapper {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.header {
+  display: flex;
+  align-items: center;
+}
+.header h6 {
+  font-weight: inherit;
+}
+.header span {
+  margin-right: 0.71rem;
+}
+.wrapper p {
+  padding: 0.2rem 0 0 1.8rem;
+}
