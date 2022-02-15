@@ -8,7 +8,7 @@ function App() {
   return (
     <Container className="App">
       <LockScreen/>
-      <Row>
+      <Row className="justify-content-center">
         <Col className="col-4 mt-5">
           <ScreenFreeReminderCard />
         </Col>
