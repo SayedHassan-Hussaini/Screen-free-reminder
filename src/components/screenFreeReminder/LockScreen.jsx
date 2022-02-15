@@ -4,6 +4,9 @@ import style from "./style.module.css";
 import Countdown from "react-countdown";
 import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+    setUpdating,
+  } from "../../store/screenReminderSclice";
 
 function LockScreen() {
   const [start, setStart] = useState(true);
@@ -17,7 +20,7 @@ function LockScreen() {
     const time =
       arr[0] * 24 * 60 * 60 * 1000 + arr[1] * 60 * 1000 + arr[2] * 1000;
     localStorage.setItem("duration_time", time);
-    // dispatch(setUpdating(false))
+     dispatch(setUpdating(false))
     return time;
   };
   const handleDisplayTime = (val) => {
@@ -28,9 +31,12 @@ function LockScreen() {
     return time;
   };
   useEffect(()=>{
+      localStorage.removeItem('duration_time')
+      localStorage.removeItem('display_time"')
+      dispatch(setUpdating(true))
       if(du_time && dis_time){
-        handleDurationTime(du_time) 
         handleDisplayTime(dis_time)
+        handleDurationTime(du_time) 
       }
   },[])
 
@@ -42,7 +48,7 @@ function LockScreen() {
           date={Date.now() + +localStorage.getItem('duration_time')}
           autoStart={start ? true : false}
           onTick={(e)=>{
-            if (localStorage.getItem("screen") === "on"){
+            if (localStorage.getItem("screen") === "on" && !updating){
                 localStorage.setItem('duration_time',e.total)
             } 
           }}
@@ -73,7 +79,7 @@ function LockScreen() {
             <h1>Screen Lock For</h1>
             <Countdown
               key={`c-5`}
-              date={Date.now() + +localStorage.getItem('duration_time')}
+              date={Date.now() + +localStorage.getItem('display_time')}
               onComplete={() => {
                 setStart(true)
               }}

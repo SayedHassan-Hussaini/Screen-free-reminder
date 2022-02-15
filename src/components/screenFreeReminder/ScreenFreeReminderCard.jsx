@@ -7,21 +7,24 @@ import CardBody from "../card/CardBody";
 import CardHeader from "../card/CardHeader";
 import Modal from "../modal/modal";
 import style from "./style.module.css";
-// import { useDispatch} from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+import {
+  setUpdating,
+  setDis_time,
+  setDu_time,
+} from "../../store/screenReminderSclice";
 
 function ScreenFreeReminderCard() {
-  // const dispatch = useDispatch();
+  const { dis_time } = useSelector(
+    (state) => state.screen
+  );
+  const dispatch = useDispatch();
   const [changeMute, setChangeMute] = useState(false);
-  const [data, setData] = useState([]);
-  const [isShow, setIsShow] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [getting, setGetting] = useState(false);
-  const [loadData, setLoadData] = useState(false);
+  const [isShow, setIsShow] = useState(true);
   // Modal
   const [sizeModal, setSizeModal] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const handleClose = () => setModalShow(false);
-  const handleShow = () => setModalShow(true);
   // state for time input
   const [durationTime, setDurationTime] = useState({
     hours: "",
@@ -38,7 +41,7 @@ function ScreenFreeReminderCard() {
     const time =
       arr[0] * 24 * 60 * 60 * 1000 + arr[1] * 60 * 1000 + arr[2] * 1000;
     localStorage.setItem("duration_time", time);
-    // dispatch(setUpdating(false));
+    dispatch(setUpdating(false));
     return time;
   };
   const handleDisplayTime = (val) => {
@@ -48,176 +51,49 @@ function ScreenFreeReminderCard() {
     localStorage.setItem("display_time", time);
     return time;
   };
-  const timeFormate = (val, getter, setter) => {
-    const arr = val.split(":");
-    const hover = arr[0];
-    const minutes = arr[1];
-    const seconds = arr[2];
-    setter({
-      ...getter,
-      ["hours"]: hover,
-      ["minutes"]: minutes,
-      ["seconds"]: seconds,
-    });
-  };
-  const getData = async () => {
-    // try {
-    //   // dispatch(setDu_time("test"))
-    //   setGetting(true);
-    //   const req = await fetch(`${API_URL}/screen_reminder/get`, {
-    //     credentials: "include",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Credentials": true,
-    //     },
-    //   });
-    //   const { payload } = await req.json();
-    //   if (payload) {
-    //     if (payload.mute) {
-    //       localStorage.setItem("screen", "on");
-    //       setIsShow(true);
-    //     } else {
-    //       localStorage.setItem("screen", "off");
-    //     }
-    //     setData(payload);
-    //     setGetting(false);
-    //   } else {
-    //     setData([]);
-    //     setGetting(false);
-    //   }
-    // } catch {
-    //   setData([]);
-    //   setGetting(false);
-    // }
-  };
-  const getUpdataData = async () => {
-    // try {
-    //   const req = await fetch(`${API_URL}/screen_reminder/get`, {
-    //     credentials: "include",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Credentials": true,
-    //     },
-    //   });
-    //   const { payload } = await req.json();
-    //   if (payload.mute) {
-    //     localStorage.setItem("screen", "on");
-    //     // dispatch(setDu_time(payload.duration));
-    //     // dispatch(setDis_time(payload.display));
-    //     // handleDurationTime(payload.duration);
-    //     // handleDisplayTime(payload.display);
-    //   } else {
-    //     localStorage.setItem("screen", "off");
-    //     // dispatch(setDu_time(payload.duration));
-    //     // dispatch(setDis_time(payload.display));
-    //     // handleDurationTime(payload.duration);
-    //     // handleDisplayTime(payload.display);
-    //   }
-    //   if (payload) {
-    //     if (payload.display != "") {
-    //       timeFormate(payload.display, displayTime, setDisplayTime);
-    //     }
-    //     if (payload.duration != "") {
-    //       timeFormate(payload.duration, durationTime, setDurationTime);
-    //     }
-    //   }
-    // } catch {
-    //   setData([]);
-    //   setLoadData(false);
-    // }
-  };
   const handleSubmit = async () => {
-    // if (
-    //   (durationTime.hours === "" &&
-    //     durationTime.minutes === "" &&
-    //     durationTime.seconds === "") ||
-    //   (displayTime.hours === "" &&
-    //     displayTime.minutes === "" &&
-    //     displayTime.seconds === "")
-    // ) {
-    //   return false;
-    // } else {
-    //   setLoading(true);
-    //   // dispatch(setUpdating(true));
-    //   const du_time =
-    //     durationTime.hours +
-    //     ":" +
-    //     durationTime.minutes +
-    //     ":" +
-    //     durationTime.seconds;
-    //   const dis_time =
-    //     displayTime.hours +
-    //     ":" +
-    //     displayTime.minutes +
-    //     ":" +
-    //     displayTime.seconds;
-    //   const { status } = await fetch(`${API_URL}/screen_reminder/new`, {
-    //     method: "POST",
-    //     credentials: "include",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Credentials": true,
-    //     },
-    //     body: JSON.stringify({
-    //       duration: du_time,
-    //       display: dis_time,
-    //       isMute: true,
-    //     }),
-    //   });
-    //   if (status === 200) {
-    //     getUpdataData();
-    //     setLoading(false);
-    //     setDurationTime({ hours: "", minutes: "", seconds: "" });
-    //     setDisplayTime({ hours: "", minutes: "", seconds: "" });
-    //     setModalShow(false);
-    //     getData();
-    //     addToast("Added Susseccfully", {
-    //       autoDismiss: true,
-    //       appearance: "success",
-    //     });
-    //   } else {
-    //     setLoading(false);
-    //     setModalShow(false);
-    //     addToast("Error Please Try Again!", {
-    //       autoDismiss: false,
-    //       appearance: "error",
-    //     });
-    //   }
-    // }
+    if (
+      (durationTime.hours === "" &&
+        durationTime.minutes === "" &&
+        durationTime.seconds === "") ||
+      (displayTime.hours === "" &&
+        displayTime.minutes === "" &&
+        displayTime.seconds === "")
+    ) {
+      return false;
+    } else {
+      dispatch(setUpdating(true));
+      const du_time =
+        durationTime.hours +
+        ":" +
+        durationTime.minutes +
+        ":" +
+        durationTime.seconds;
+      const dis_time =
+        displayTime.hours +
+        ":" +
+        displayTime.minutes +
+        ":" +
+        displayTime.seconds;
+        console.log("dis",dis_time)
+      dispatch(setDu_time(du_time));
+      dispatch(setDis_time(dis_time));
+      handleDisplayTime(dis_time);
+      handleDurationTime(du_time);
+      setModalShow(false);
+    }
   };
   const handleMute = async () => {
-    // setChangeMute(true);
-    // await fetch(`${API_URL}/screen_reminder/update-mute`, {
-    //   method: "PUT",
-    //   credentials: "include",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Credentials": true,
-    //   },
-    //   body: JSON.stringify({
-    //     mute: !isShow,
-    //   }),
-    // }).then((res) => {
-    //   if (res.status != 200) {
-    //     setChangeMute(false);
-    //     getData();
-    //     addToast("Error Please Try Again!", {
-    //       autoDismiss: true,
-    //       appearance: "error",
-    //     });
-    //     return false;
-    //   } else {
-    //     if (!isShow) {
-    //       localStorage.setItem("screen", "on");
-    //       setIsShow(true);
-    //     } else {
-    //       localStorage.setItem("screen", "off");
-    //       setIsShow(false);
-    //     }
-    //     setChangeMute(false);
-    //     // setIsShow(!isShow)
-    //   }
-    // });
+    setChangeMute(true);
+    if(isShow){
+      setIsShow(false)
+      localStorage.setItem("screen", "off");
+      setChangeMute(false);
+    }else{
+      setIsShow(true)
+      localStorage.setItem("screen", "on");
+      setChangeMute(false);
+    }
   };
 
   const setScreeanValue = (e) => {
@@ -248,8 +124,7 @@ function ScreenFreeReminderCard() {
   };
   //
   useEffect(() => {
-    getData();
-    getUpdataData();
+    localStorage.setItem("screen", "on");
   }, []);
 
   return (
@@ -299,7 +174,7 @@ function ScreenFreeReminderCard() {
                   />
                 )}
               </span>
-              <h6>{data?.display} screen free time</h6>
+              <h6>{dis_time} screen free time</h6>
             </div>
             <p>
               last intermission{" "}
@@ -373,7 +248,6 @@ function ScreenFreeReminderCard() {
               onClick={() => {
                 handleSubmit();
               }}
-              disabled={loading}
               variant="primary"
               type="button"
             >

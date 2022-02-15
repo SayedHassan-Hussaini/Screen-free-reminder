@@ -4,7 +4,7 @@ export const screenReminderSclice = createSlice({
   name: "screen",
   initialState: {
     du_time: "00:00:10",
-    dis_time: "00:50:05",
+    dis_time: "00:00:05",
     updating:true
   },
   reducers: {
