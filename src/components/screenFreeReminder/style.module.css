@@ -19,3 +19,28 @@
 .wrapper p {
   padding: 0.2rem 0 0 1.8rem;
 }
+/* screen */
+.lockScreen {
+  padding-top: 20% !important;
+  position: fixed !important;
+  top: 0px !important;
+  left: -100px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  z-index: 1030000 !important;
+  color: black;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.screenDiv {
+  padding-top: 5% !important;
+  margin-left: 45% !important;
+  margin-top: -7% !important;
+  height: 300px !important;
+  width: 300px !important;
+  border-radius: 50% !important;
+  background-color: black;
+  color: white !important;
+}
+.lockScreenHide {
+  display: none !important;
+}
