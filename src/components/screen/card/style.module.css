@@ -1,5 +1,4 @@
-/* .App{
-}
+
 .card {
   border-radius: 7px !important;
   padding: 1.5rem;
@@ -8,7 +7,7 @@
   color: var(--secondary-dark-gray);
 }
 
-.card .card_header {
+.card .cardHeader {
   display: flex;
   align-items: center;
   color: var(--secondary-dark-gray);
@@ -16,20 +15,20 @@
   line-height: 20px;
 }
 
-.card_header img {
+.cardHeader img {
   padding-right: 0.71rem;
   height: 1.25rem;
 }
 
-.card_header .actions_area {
+.cardHeader .actionsArea {
   flex-grow: 1;
   text-align: right;
 }
-.card_header .actions_area > * {
+.cardHeader .actionsArea > * {
   margin-left: 0.8rem;
   cursor: pointer;
 }
 
-.card .card_body {
+.card .cardBody {
   padding-top: 0.43rem;
-} */
+}

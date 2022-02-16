@@ -12,7 +12,7 @@ import {
   setUpdating,
   setDis_time,
   setDu_time,
-} from "../../store/screenReminderSclice";
+} from "../../../store/screenReminderSclice";
 
 function ScreenFreeReminderCard() {
   const { dis_time } = useSelector(

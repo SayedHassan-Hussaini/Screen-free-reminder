@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
-import ScreenFreeReminderCard from "./components/screenFreeReminder/ScreenFreeReminderCard";
-import LockScreen from './components/screenFreeReminder/LockScreen'
+import ScreenFreeReminderCard from "./components/screen/screenFreeReminder/ScreenFreeReminderCard";
+import LockScreen from './components/screen/screenFreeReminder/LockScreen'
 import { Container, Row, Col } from "react-bootstrap";
 
 function App() {

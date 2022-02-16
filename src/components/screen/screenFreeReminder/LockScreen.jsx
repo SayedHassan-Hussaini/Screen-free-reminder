@@ -1,10 +1,8 @@
-import { Icon } from "@iconify/react";
-import { Row, Col, Button, Form, Image, Tabs, Tab } from "react-bootstrap";
 import style from "./style.module.css";
 import Countdown from "react-countdown";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUpdating } from "../../store/screenReminderSclice";
+import { setUpdating } from "../../../store/screenReminderSclice";
 
 function LockScreen() {
   const [start, setStart] = useState(true);
